@@ -51,22 +51,35 @@
     var myRevenueMessage = document.getElementById("revenue");
     myImage.setAttribute('src', 'static/coffee_beans.jpg');
 
-    function makeCoffee() {
-        myImage.setAttribute('src', 'static/coffee_mug.jpg');
-        // resetCoffee();
-        setTimeout(resetCoffee, 1500);
-    }
+    // function makeCoffee() {
+    //     myImage.setAttribute('src', 'static/coffee_mug.jpg');
+    //     // resetCoffee();
+    //     setTimeout(resetCoffee, 1500);
+    // }
 
-    function resetCoffee() {
-        myImage.setAttribute('src', 'static/coffee_beans.jpg');
-    }
-    function coffeeMachine() {
+    // function resetCoffee() {
+    //     myImage.setAttribute('src', 'static/coffee_beans.jpg');
+    // }
+
+    // array of drinks ordered
+    var drinksOrdered = [];
+
+    function makeCoffee(drinkType) {
+        drinksOrdered.push(drinkType);
+        console.log("The drinks that have been made are", drinksOrdered);
         myImage.setAttribute('src', 'static/coffee_machine.jpg');
-        setTimeout(makeCoffee, 1000);
+        // inline function calls mug 1 second after click
+        setTimeout(function () {
+            myImage.setAttribute('src', 'static/coffee_mug.jpg');
+            }, 1000);
+        // inline function calls beans 1.5 seconds after mug (2.5 seconds post-click)
+        setTimeout(function () {
+            myImage.setAttribute('src', 'static/coffee_beans.jpg');
+            }, 2500);
     }
-    
 
-    myImage.addEventListener('click', coffeeMachine);
+    // calls function to make coffee upon user click. adds "brew" to array of drinks ordered
+    myImage.addEventListener('click', function(){return makeCoffee("brew")});
 
     // use this JavaScript object in further study step
 
