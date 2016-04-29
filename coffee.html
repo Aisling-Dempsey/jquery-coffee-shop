@@ -63,16 +63,37 @@
     function makeCoffee(drinkType) {
         drinksOrdered.push(drinkType);
         console.log("The drinks that have been made are", drinksOrdered);
-        $('#coffee-image').attr('src', 'static/coffee_machine.jpg');
-        // inline function calls mug 1 second after click
-        setTimeout(function () {
-            $('#coffee-image').attr('src', 'static/coffee_mug.jpg');
+
+        $('#coffee-image').fadeOut(1000);
+
+        setTimeout(function() {
+            $('#coffee-image').attr('src', 'static/coffee_machine.jpg');
             }, 1000);
-        // inline function calls beans 1.5 seconds after mug (2.5 seconds post-click)
-        setTimeout(function () {
-            $('#coffee-image').attr('src', 'static/coffee_beans.jpg');
-            }, 2500);
+        setTimeout(function() {
+            $('#coffee-image').fadeIn(1000);
+            }, 1000);   
+        // inline function calls mug 1 second after click
+        setTimeout(function() {
+            $('#coffee-image').fadeOut(1000);
+            }, 3000);
         
+        
+        setTimeout(function() {
+            $('#coffee-image').attr('src', 'static/coffee_mug.jpg');
+            }, 4000);
+        setTimeout(function() {$('#coffee-image').fadeIn(1000);
+            }, 4000);
+        setTimeout(function(){
+            $('#coffee-image').fadeOut(1000);
+            },6000);
+
+        
+        // inline function calls beans 1.5 seconds after mug (2.5 seconds post-click)
+        setTimeout(function() {
+            $('#coffee-image').attr('src', 'static/coffee_beans.jpg');
+            }, 7000);
+        setTimeout(function(){
+            $('#coffee-image').fadeIn(1000);},7000);
         $("#revenue").html(revenue(drinksOrdered));
     }
 
