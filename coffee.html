@@ -43,53 +43,57 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery.js"></script>
 <script>
 
     // Set these variables to their DOM elements
 
-    var myImage = document.getElementById("coffee-image");
-    var myRevenueMessage = document.getElementById("revenue");
-    myImage.setAttribute('src', 'static/coffee_beans.jpg');
+    // var myImage = document.getElementById("coffee-image");
+    // changed to $(#coffee-image)
 
-    // function makeCoffee() {
-    //     myImage.setAttribute('src', 'static/coffee_mug.jpg');
-    //     // resetCoffee();
-    //     setTimeout(resetCoffee, 1500);
-    // }
+    // var myRevenueMessage = document.getElementById("revenue");
+    // $('#coffee-image').attr('src', 'static/coffee_beans.jpg');
 
-    // function resetCoffee() {
-    //     myImage.setAttribute('src', 'static/coffee_beans.jpg');
-    // }
+    $("#coffee-image").attr('src', 'static/coffee_beans.jpg')
+    myRevenueMessage = $("#revenue")
 
-    // array of drinks ordered
+
     var drinksOrdered = [];
 
     function makeCoffee(drinkType) {
         drinksOrdered.push(drinkType);
         console.log("The drinks that have been made are", drinksOrdered);
-        myImage.setAttribute('src', 'static/coffee_machine.jpg');
+        $('#coffee-image').attr('src', 'static/coffee_machine.jpg');
         // inline function calls mug 1 second after click
         setTimeout(function () {
-            myImage.setAttribute('src', 'static/coffee_mug.jpg');
+            $('#coffee-image').attr('src', 'static/coffee_mug.jpg');
             }, 1000);
         // inline function calls beans 1.5 seconds after mug (2.5 seconds post-click)
         setTimeout(function () {
-            myImage.setAttribute('src', 'static/coffee_beans.jpg');
+            $('#coffee-image').attr('src', 'static/coffee_beans.jpg');
             }, 2500);
+        
+        $("#revenue").html(revenue(drinksOrdered));
     }
 
     // calls function to make coffee upon user click. adds "brew" to array of drinks ordered
-    myImage.addEventListener('click', function(){return makeCoffee("brew")});
+    
+    // var brew
+    // myImage.addEventListener('click', function(){return makeCoffee("brew")});
+    $('#coffee-image').click(function(){return makeCoffee("brew")});
 
     // use this JavaScript object in further study step
 
-    var espresso = document.getElementById("espresso");
-    var latte = document.getElementById("latte");
-    var hotChocolate = document.getElementById("hot-chocolate");
+    // var espresso = document.getElementById("espresso");
+    // var latte = document.getElementById("latte");
+    // var hotChocolate = document.getElementById("hot-chocolate");
 
-    espresso.addEventListener('click', function(){return makeCoffee("espresso")});
-    hotChocolate.addEventListener('click', function(){return makeCoffee("hot chocolate")});
-    latte.addEventListener('click', function(){return makeCoffee("latte")});
+    // espresso.addEventListener('click', function(){return makeCoffee("espresso")});
+    $("#espresso").click(function(){return makeCoffee("espresso")});
+    // hotChocolate.addEventListener('click', function(){return makeCoffee("hot chocolate")});
+    $("#hot-chocolate").click(function(){return makeCoffee("hot chocolate")});
+    // latte.addEventListener('click', function(){return makeCoffee("latte")});
+    $("#latte").click(function(){return makeCoffee("latte")});
 
     var prices = {
         "brew": 2.05,
@@ -98,6 +102,14 @@
         "hot chocolate": 2.50
     };
 
+    function revenue(drinksOrdered) {
+        var totalCost = 0;
+        for (var i = 0; i < drinksOrdered.length; i++) {
+        totalCost = totalCost + prices[drinksOrdered[i]];
+        }
+        console.log(totalCost);
+        return totalCost;
+    }
 
 </script>
 
